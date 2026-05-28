@@ -25,11 +25,10 @@ public partial class ProfileEditorViewModel : ObservableObject
     [ObservableProperty] private FieldUiModel? _selectedField;
     [ObservableProperty] private string _searchText = "";
 
-    // Свойства для доступа из DataTemplate
-    public ObservableCollection<FieldUiModel> Fields => SelectedTableFields;
-    public IRelayCommand<FieldUiModel> MoveUp => MoveFieldUpCommand;
-    public IRelayCommand<FieldUiModel> MoveDown => MoveFieldDownCommand;
-    public IRelayCommand<FieldUiModel> Remove => RemoveFieldCommand;
+    // Свойства для доступа из DataTemplate (имена должны совпадать с XAML: MoveUpCommand, MoveDownCommand, RemoveCommand)
+    public IRelayCommand<FieldUiModel> MoveUpCommand => MoveFieldUpCommand;
+    public IRelayCommand<FieldUiModel> MoveDownCommand => MoveFieldDownCommand;
+    public IRelayCommand<FieldUiModel> RemoveCommand => RemoveFieldCommand;
 
     public ProfileEditorViewModel(
         IXmlProfileLoader loader,
