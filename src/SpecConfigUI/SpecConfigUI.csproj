@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <!-- Все Avalonia пакеты одной версии 11.2.1 -->
+    <PackageReference Include="Avalonia" Version="11.2.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.2.1" Condition="'$(Configuration)' == 'Debug'" />
+    
+    <!-- UI и MVVM -->
+    <PackageReference Include="FluentAvalonia" Version="1.1.0-beta1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    
+    <!-- DI + Config + Logging -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
+    <PackageReference Include="Serilog" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\SpecConfig.Core\SpecConfig.Core.csproj" />
+    <ProjectReference Include="..\SpecConfig.Infrastructure\SpecConfig.Infrastructure.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
