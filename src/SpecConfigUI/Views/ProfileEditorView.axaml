@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:SpecConfigUI.ViewModels"
              xmlns:core="using:SpecConfig.Core.Models"
-             xmlns:dg="using:Avalonia.Controls"
              xmlns:converters="using:SpecConfigUI.Converters"
              x:Class="SpecConfigUI.Views.ProfileEditorView"
              x:DataType="vm:ProfileEditorViewModel">
@@ -36,48 +35,48 @@
                     BorderThickness="1" CornerRadius="4">
                 <DockPanel Margin="8">
                     <!-- DataGrid с полями -->
-                    <dg:DataGrid ItemsSource="{Binding SelectedTableFields}" 
+                    <DataGrid ItemsSource="{Binding SelectedTableFields}" 
                                  SelectedItem="{Binding SelectedField}"
                                  AutoGenerateColumns="False" 
                                  CanUserSortColumns="False"
                                  Margin="0,0,0,8"
                                  DockPanel.Dock="Top">
-                        <dg:DataGrid.Columns>
+                        <DataGrid.Columns>
                             <!-- Кнопки сортировки -->
-                            <dg:DataGridTemplateColumn Header="↕" Width="60" CanUserResize="False">
-                                <dg:DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn Header="↕" Width="60" CanUserResize="False">
+                                <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center">
-                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveFieldUpCommand}" 
+                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveUp}" 
                                                     CommandParameter="{Binding}" Content="⬆" Padding="2,0" 
-                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={StaticResource GreaterThanZero}}"/>
-                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveFieldDownCommand}" 
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.Fields.IndexOf, Converter={StaticResource GreaterThanZero}}"/>
+                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveDown}" 
                                                     CommandParameter="{Binding}" Content="⬇" Padding="2,0"
-                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={StaticResource LessThanCountMinusOne}, ConverterParameter={Binding $parent[UserControl].DataContext.SelectedTableFields}}"/>
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.Fields.IndexOf, Converter={StaticResource LessThanCountMinusOne}, ConverterParameter={Binding $parent[UserControl].DataContext.Fields}}"/>
                                         </StackPanel>
                                     </DataTemplate>
-                                </dg:DataGridTemplateColumn.CellTemplate>
-                            </dg:DataGridTemplateColumn>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
                             <!-- Поля для редактирования -->
-                            <dg:DataGridTextColumn Header="Наименование" Binding="{Binding Caption}" Width="1.5*"/>
-                            <dg:DataGridTextColumn Header="BOM-поле" Binding="{Binding Data}" Width="1*"/>
-                            <dg:DataGridCheckBoxColumn Header="Агрегат" Binding="{Binding Aggregate}" Width="80"/>
-                            <dg:DataGridCheckBoxColumn Header="Видимость" Binding="{Binding Visible}" Width="90"/>
-                            <dg:DataGridTextColumn Header="Формат" Binding="{Binding Format}" Width="1*"/>
+                            <DataGridTextColumn Header="Наименование" Binding="{Binding Caption}" Width="1.5*"/>
+                            <DataGridTextColumn Header="BOM-поле" Binding="{Binding Data}" Width="1*"/>
+                            <DataGridCheckBoxColumn Header="Агрегат" Binding="{Binding Aggregate}" Width="80"/>
+                            <DataGridCheckBoxColumn Header="Видимость" Binding="{Binding Visible}" Width="90"/>
+                            <DataGridTextColumn Header="Формат" Binding="{Binding Format}" Width="1*"/>
 
                             <!-- Действия -->
-                            <dg:DataGridTemplateColumn Header="" Width="40" CanUserResize="False">
-                                <dg:DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn Header="" Width="40" CanUserResize="False">
+                                <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Command="{Binding $parent[UserControl].DataContext.RemoveFieldCommand}" 
+                                        <Button Command="{Binding $parent[UserControl].DataContext.Remove}" 
                                                 CommandParameter="{Binding}" Content="🗑" Foreground="Red" 
                                                 Padding="4,2" ToolTip.Tip="Удалить поле"/>
                                     </DataTemplate>
-                                </dg:DataGridTemplateColumn.CellTemplate>
-                            </dg:DataGridTemplateColumn>
-                        </dg:DataGrid.Columns>
-                    </dg:DataGrid>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                     <!-- Кнопки действий -->
                     <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
