@@ -53,12 +53,12 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center">
-                                            <Button Command="{Binding $parent[UserControl].(vm:ProfileEditorViewModel.DataContext).MoveUp}" 
+                                            <Button Command="{Binding $parent[DataGrid].DataContext.MoveUp}" 
                                                     CommandParameter="{Binding}" Content="⬆" Padding="2,0" 
-                                                    IsEnabled="{Binding $parent[UserControl].(vm:ProfileEditorViewModel.DataContext).Fields.IndexOf(this), Converter={StaticResource GreaterThanZero}}"/>
-                                            <Button Command="{Binding $parent[UserControl].(vm:ProfileEditorViewModel.DataContext).MoveDown}" 
+                                                    IsEnabled="{Binding $parent[DataGrid].DataContext.Fields.IndexOf(this), Converter={StaticResource GreaterThanZero}}"/>
+                                            <Button Command="{Binding $parent[DataGrid].DataContext.MoveDown}" 
                                                     CommandParameter="{Binding}" Content="⬇" Padding="2,0"
-                                                    IsEnabled="{Binding $parent[UserControl].(vm:ProfileEditorViewModel.DataContext).Fields.IndexOf(this), Converter={StaticResource LessThanCountMinusOne}, ConverterParameter={Binding $parent[UserControl].(vm:ProfileEditorViewModel.DataContext).Fields}}"/>
+                                                    IsEnabled="{Binding $parent[DataGrid].DataContext.Fields.IndexOf(this), Converter={StaticResource LessThanCountMinusOne}, ConverterParameter={Binding $parent[DataGrid].DataContext.Fields}}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -75,7 +75,7 @@
                             <DataGridTemplateColumn Header="" Width="40" CanUserResize="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Command="{Binding $parent[UserControl].(vm:ProfileEditorViewModel.DataContext).Remove}" 
+                                        <Button Command="{Binding $parent[DataGrid].DataContext.Remove}" 
                                                 CommandParameter="{Binding}" Content="🗑" Foreground="Red" 
                                                 Padding="4,2" ToolTip.Tip="Удалить поле"/>
                                     </DataTemplate>
