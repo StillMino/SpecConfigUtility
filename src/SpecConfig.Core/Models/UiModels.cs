@@ -28,31 +28,31 @@ namespace SpecConfig.Core.Models
         public string Caption
         {
             get => _caption;
-            set => SetProperty(ref _caption, value, onChanged: () => IsModified = true);
+            set => SetProperty(ref _caption, value, propertyChanged: () => IsModified = true);
         }
 
         public string Data
         {
             get => _data;
-            set => SetProperty(ref _data, value, onChanged: () => IsModified = true);
+            set => SetProperty(ref _data, value, propertyChanged: () => IsModified = true);
         }
 
         public bool Aggregate
         {
             get => _aggregate;
-            set => SetProperty(ref _aggregate, value, onChanged: () => IsModified = true);
+            set => SetProperty(ref _aggregate, value, propertyChanged: () => IsModified = true);
         }
 
         public bool Visible
         {
             get => _visible;
-            set => SetProperty(ref _visible, value, onChanged: () => IsModified = true);
+            set => SetProperty(ref _visible, value, propertyChanged: () => IsModified = true);
         }
 
         public string Format
         {
             get => _format;
-            set => SetProperty(ref _format, value, onChanged: () => IsModified = true);
+            set => SetProperty(ref _format, value, propertyChanged: () => IsModified = true);
         }
 
         public bool IsModified
