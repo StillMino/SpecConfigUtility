@@ -2,60 +2,68 @@
 # Build artifacts
 bin/
 obj/
-*.exe
 *.dll
+*.exe
 *.pdb
-*.nupkg
-*.snupkg
-*.msi
-*.msp
-*.msm
+*.userprefs
 
 # Dependencies
 packages/
 node_modules/
-bower_components/
+.nuget/
 
 # Logs
 *.log
-**/logs/
 
-# Environment specific
+# Environment
 .env
 .env.local
-.env.*
-!src/SpecConfig.Core/Models/UiModels.cs
+*.env.*
 
-# OS generated files
-.DS_Store
-Thumbs.db
-desktop.ini
-$RECYCLE.BIN/
-*.backup
-
-# IDE
-.vs/
+# Editors
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Test results
-TestResults/
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
 coverage/
-*.coverage
-**/coverage/**
+htmlcov/
+.coverage
 
-# User-specific
-*.user
-*.userosscache
-*.suo
-*.csproj.user
-*.vbproj.user
-*.userprefs
+# Python (if applicable)
+__pycache__/
+*.pyc
+*.pyo
+.Python
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+.mypy_cache/
+.pytest_cache/
 
-# Localized resources
-*.resx
-**/Debug/
-**/Release/
+# Node (if applicable)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java (if applicable)
+target/
+.gradle/
+*.class
+*.jar
+*.war
+*.ear
+
+# C# specific
+[Bb]in/
+[Oo]bj/
+*.nupkg
+[._]*.sln.ide/
 ```
