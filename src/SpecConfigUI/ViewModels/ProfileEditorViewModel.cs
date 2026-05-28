@@ -27,9 +27,9 @@ public partial class ProfileEditorViewModel : ObservableObject
 
     // Свойства для доступа из DataTemplate
     public ObservableCollection<FieldUiModel> Fields => SelectedTableFields;
-    public RelayCommand<FieldUiModel> MoveUp => MoveFieldUpCommand;
-    public RelayCommand<FieldUiModel> MoveDown => MoveFieldDownCommand;
-    public RelayCommand<FieldUiModel> Remove => RemoveFieldCommand;
+    public IRelayCommand<FieldUiModel> MoveUp => MoveFieldUpCommand;
+    public IRelayCommand<FieldUiModel> MoveDown => MoveFieldDownCommand;
+    public IRelayCommand<FieldUiModel> Remove => RemoveFieldCommand;
 
     public ProfileEditorViewModel(
         IXmlProfileLoader loader,
