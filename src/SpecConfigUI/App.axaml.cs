@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using SpecConfigUI.ViewModels;
+using SpecConfigUI.Views;
 
 namespace SpecConfigUI;
 
@@ -21,8 +22,12 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var vm = _provider.GetRequiredService<MainViewModel>();
-            desktop.MainWindow = new Views.MainWindow { DataContext = vm };
+            // MainViewModel получает профильный редактор через DI
+            var mainVm = _provider.GetRequiredService<MainViewModel>();
+            desktop.MainWindow = new MainWindow 
+            { 
+                DataContext = mainVm 
+            };
         }
         base.OnFrameworkInitializationCompleted();
     }

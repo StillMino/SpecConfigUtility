@@ -1,18 +1,67 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:SpecConfigUI.ViewModels"
+        xmlns:views="using:SpecConfigUI.Views"
+        xmlns:fa="using:FluentAvalonia.UI.Controls"
         x:Class="SpecConfigUI.Views.MainWindow"
         x:DataType="vm:MainViewModel"
-        Title="SpecConfig Utility" Width="900" Height="600"
+        Title="SpecConfig Utility для Model Studio CS"
+        Width="1200" Height="800"
         WindowStartupLocation="CenterScreen">
-    <DockPanel Margin="16">
-        <StackPanel DockPanel.Dock="Top" Spacing="8" Margin="0,0,0,16">
-            <TextBlock Text="SpecConfig Utility" FontSize="20" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding StatusText}" Foreground="Gray"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Spacing="8">
-            <Button Command="{Binding ConnectToCadCommand}" Content="Подключиться к nanoCAD"/>
-            <Button Command="{Binding GetDocNameCommand}" Content="Получить имя документа" IsEnabled="{Binding IsCadConnected}"/>
-        </StackPanel>
+
+    <Window.Styles>
+        <Style Selector="Button.Accent">
+            <Setter Property="Background" Value="{DynamicResource SystemControlHighlightAccentBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightAltTextBrush}"/>
+        </Style>
+    </Window.Styles>
+
+    <DockPanel>
+        <!-- Заголовок -->
+        <Border DockPanel.Dock="Top" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}" 
+                Padding="16,12" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <StackPanel>
+                <TextBlock Text="⚙️ SpecConfig Utility" FontSize="20" FontWeight="SemiBold"/>
+                <TextBlock Text="Настройка спецификаций для Model Studio CS 2025" 
+                           Foreground="{DynamicResource SystemControlForegroundChromeMediumBrush}" FontSize="12"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Навигация (вкладки) -->
+        <fa:TabView DockPanel.Dock="Top" Margin="8,8,8,0">
+            <fa:TabViewItem Header="📁 Export" IsSelected="True">
+                <views:ProfileEditorView/>
+            </fa:TabViewItem>
+            <fa:TabViewItem Header="📋 Specifier">
+                <views:ProfileEditorView/>
+            </fa:TabViewItem>
+            <fa:TabViewItem Header="⚙️ Настройки" IsEnabled="False">
+                <TextBlock Text="В разработке..." Margin="16"/>
+            </fa:TabViewItem>
+        </fa:TabView>
+
+        <!-- Статус-бар -->
+        <Border DockPanel.Dock="Bottom" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}" 
+                Padding="12,8" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock Grid.Column="0" Text="{Binding StatusText}" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Text="|" Margin="8,0" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="2" Text="{Binding CurrentProfileName}" VerticalAlignment="Center" 
+                           Foreground="{DynamicResource SystemControlForegroundAccentBrush}"/>
+            </Grid>
+        </Border>
+
+        <!-- Основной контент (заглушка для будущего функционала) -->
+        <Border Margin="8" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" 
+                BorderThickness="1" CornerRadius="8" Background="{DynamicResource SystemControlBackgroundBaseHighBrush}">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="12">
+                <TextBlock Text="🎯 Выберите профиль для редактирования" FontSize="16" FontWeight="SemiBold"/>
+                <TextBlock Text="Используйте кнопки выше для загрузки и настройки профилей спецификаций" 
+                           TextWrapping="Wrap" TextAlignment="Center" MaxWidth="500" 
+                           Foreground="{DynamicResource SystemControlForegroundChromeMediumBrush}"/>
+                <Button Content="📂 Открыть файл профиля" Command="{Binding OpenProfileCommand}" 
+                        HorizontalAlignment="Center" Margin="0,16,0,0"/>
+            </StackPanel>
+        </Border>
     </DockPanel>
 </Window>

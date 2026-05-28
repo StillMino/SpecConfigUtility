@@ -1,0 +1,94 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SpecConfigUI.ViewModels"
+             xmlns:core="using:SpecConfig.Core.Models"
+             xmlns:dg="using:Avalonia.Controls"
+             x:Class="SpecConfigUI.Views.ProfileEditorView"
+             x:DataType="vm:ProfileEditorViewModel">
+
+    <DockPanel Margin="8">
+        <!-- Панель инструментов -->
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,0,0,8">
+            <Button Command="{Binding AddFieldCommand}" Content="➕ Добавить поле" 
+                    IsEnabled="{Binding SelectedTable, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+            <TextBlock Text="Поля таблицы:" VerticalAlignment="Center" FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding SelectedTableFields.Count}" VerticalAlignment="Center" 
+                       Foreground="{DynamicResource SystemControlForegroundAccentBrush}"/>
+        </StackPanel>
+
+        <!-- Основная область: список таблиц + редактор полей -->
+        <Grid ColumnDefinitions="200,*">
+            <!-- Список таблиц -->
+            <Border Grid.Column="0" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" 
+                    BorderThickness="1" Margin="0,0,8,0" CornerRadius="4">
+                <ListBox ItemsSource="{Binding Tables}" SelectedItem="{Binding SelectedTable}" 
+                         DisplayMemberPath="Caption" Margin="4"/>
+            </Border>
+
+            <!-- Редактор полей -->
+            <Border Grid.Column="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" 
+                    BorderThickness="1" CornerRadius="4">
+                <DockPanel Margin="8">
+                    <!-- DataGrid с полями -->
+                    <dg:DataGrid ItemsSource="{Binding SelectedTableFields}" 
+                                 SelectedItem="{Binding SelectedField}"
+                                 AutoGenerateColumns="False" 
+                                 CanUserSortColumns="False"
+                                 Margin="0,0,0,8"
+                                 DockPanel.Dock="Top">
+                        <dg:DataGrid.Columns>
+                            <!-- Кнопки сортировки -->
+                            <dg:DataGridTemplateColumn Header="↕" Width="60" CanUserResize="False">
+                                <dg:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center">
+                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveFieldUpCommand}" 
+                                                    CommandParameter="{Binding}" Content="⬆" Padding="2,0" 
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={x:Static Converters.GreaterThanZero}}"/>
+                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveFieldDownCommand}" 
+                                                    CommandParameter="{Binding}" Content="⬇" Padding="2,0"
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={x:Static Converters.LessThanCountMinusOne}}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </dg:DataGridTemplateColumn.CellTemplate>
+                            </dg:DataGridTemplateColumn>
+
+                            <!-- Поля для редактирования -->
+                            <dg:DataGridTextColumn Header="Наименование" Binding="{Binding Caption}" Width="1.5*"/>
+                            <dg:DataGridTextColumn Header="BOM-поле" Binding="{Binding Data}" Width="1*"/>
+                            <dg:DataGridCheckBoxColumn Header="Агрегат" Binding="{Binding Aggregate}" Width="80"/>
+                            <dg:DataGridCheckBoxColumn Header="Видимость" Binding="{Binding Visible}" Width="90"/>
+                            <dg:DataGridTextColumn Header="Формат" Binding="{Binding Format}" Width="1*"/>
+
+                            <!-- Действия -->
+                            <dg:DataGridTemplateColumn Header="" Width="40" CanUserResize="False">
+                                <dg:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding $parent[UserControl].DataContext.RemoveFieldCommand}" 
+                                                CommandParameter="{Binding}" Content="🗑" Foreground="Red" 
+                                                Padding="4,2" ToolTip.Tip="Удалить поле"/>
+                                    </DataTemplate>
+                                </dg:DataGridTemplateColumn.CellTemplate>
+                            </dg:DataGridTemplateColumn>
+                        </dg:DataGrid.Columns>
+                    </dg:DataGrid>
+
+                    <!-- Кнопки действий -->
+                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+                        <Button Command="{Binding CancelChangesCommand}" Content="❌ Отмена" 
+                                IsEnabled="{Binding State.HasChanges}"/>
+                        <Button Command="{Binding ApplyChangesCommand}" Content="✅ Применить" 
+                                IsEnabled="{Binding State.HasChanges}" Classes="Accent"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- Статус и ошибки -->
+        <StackPanel DockPanel.Dock="Bottom" Margin="0,8,0,0">
+            <TextBlock Text="{Binding State.ErrorMessage}" Foreground="Red" TextWrapping="Wrap" 
+                       IsVisible="{Binding State.ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+            <TextBlock Text="{Binding State.StatusMessage}" Foreground="Gray" FontSize="11"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>
