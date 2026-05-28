@@ -2,14 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:SpecConfigUI.ViewModels"
              xmlns:core="using:SpecConfig.Core.Models"
-             xmlns:converters="using:SpecConfigUI.Converters"
              x:Class="SpecConfigUI.Views.ProfileEditorView"
              x:DataType="vm:ProfileEditorViewModel">
-
-    <UserControl.Resources>
-        <converters:IndexGreaterThanZeroConverter x:Key="GreaterThanZero"/>
-        <converters:IndexLessThanCountMinusOneConverter x:Key="LessThanCountMinusOne"/>
-    </UserControl.Resources>
 
     <DockPanel Margin="8">
         <!-- Панель инструментов -->
@@ -41,7 +35,8 @@
                     BorderThickness="1" CornerRadius="4">
                 <DockPanel Margin="8">
                     <!-- DataGrid с полями -->
-                    <DataGrid ItemsSource="{Binding SelectedTableFields}" 
+                    <DataGrid Name="FieldsDataGrid"
+                              ItemsSource="{Binding SelectedTableFields}" 
                                  SelectedItem="{Binding SelectedField}"
                                  AutoGenerateColumns="False" 
                                  CanUserSortColumns="False"
@@ -53,12 +48,10 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate x:DataType="core:FieldUiModel">
                                         <StackPanel Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center">
-                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveUp}" 
-                                                    CommandParameter="{Binding}" Content="⬆" Padding="2,0" 
-                                                    IsEnabled="{Binding $parent[UserControl].DataContext.Fields.IndexOf(this), Converter={StaticResource GreaterThanZero}}"/>
-                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveDown}" 
-                                                    CommandParameter="{Binding}" Content="⬇" Padding="2,0"
-                                                    IsEnabled="{Binding $parent[UserControl].DataContext.Fields.IndexOf(this), Converter={StaticResource LessThanCountMinusOne}}"/>
+                                            <Button Command="{Binding #FieldsDataGrid.DataContext.MoveUpCommand}" 
+                                                    CommandParameter="{Binding}" Content="⬆" Padding="2,0"/>
+                                            <Button Command="{Binding #FieldsDataGrid.DataContext.MoveDownCommand}" 
+                                                    CommandParameter="{Binding}" Content="⬇" Padding="2,0"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -75,7 +68,7 @@
                             <DataGridTemplateColumn Header="" Width="40" CanUserResize="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate x:DataType="core:FieldUiModel">
-                                        <Button Command="{Binding $parent[UserControl].DataContext.Remove}" 
+                                        <Button Command="{Binding #FieldsDataGrid.DataContext.RemoveCommand}" 
                                                 CommandParameter="{Binding}" Content="🗑" Foreground="Red" 
                                                 Padding="4,2" ToolTip.Tip="Удалить поле"/>
                                     </DataTemplate>
