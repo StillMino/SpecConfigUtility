@@ -53,7 +53,7 @@
                                                     IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={StaticResource GreaterThanZero}}"/>
                                             <Button Command="{Binding $parent[UserControl].DataContext.MoveFieldDownCommand}" 
                                                     CommandParameter="{Binding}" Content="⬇" Padding="2,0"
-                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={StaticResource LessThanCountMinusOne}}"/>
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={StaticResource LessThanCountMinusOne}, ConverterParameter={Binding $parent[UserControl].DataContext.SelectedTableFields}}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </dg:DataGridTemplateColumn.CellTemplate>
