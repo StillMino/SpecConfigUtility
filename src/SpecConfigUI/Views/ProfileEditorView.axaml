@@ -3,8 +3,14 @@
              xmlns:vm="using:SpecConfigUI.ViewModels"
              xmlns:core="using:SpecConfig.Core.Models"
              xmlns:dg="using:Avalonia.Controls"
+             xmlns:converters="using:SpecConfigUI.Converters"
              x:Class="SpecConfigUI.Views.ProfileEditorView"
              x:DataType="vm:ProfileEditorViewModel">
+
+    <UserControl.Resources>
+        <converters:IndexGreaterThanZeroConverter x:Key="GreaterThanZero"/>
+        <converters:IndexLessThanCountMinusOneConverter x:Key="LessThanCountMinusOne"/>
+    </UserControl.Resources>
 
     <DockPanel Margin="8">
         <!-- Панель инструментов -->
@@ -44,10 +50,10 @@
                                         <StackPanel Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center">
                                             <Button Command="{Binding $parent[UserControl].DataContext.MoveFieldUpCommand}" 
                                                     CommandParameter="{Binding}" Content="⬆" Padding="2,0" 
-                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={x:Static Converters.GreaterThanZero}}"/>
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={StaticResource GreaterThanZero}}"/>
                                             <Button Command="{Binding $parent[UserControl].DataContext.MoveFieldDownCommand}" 
                                                     CommandParameter="{Binding}" Content="⬇" Padding="2,0"
-                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={x:Static Converters.LessThanCountMinusOne}}"/>
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.SelectedTableFields.IndexOf, Converter={StaticResource LessThanCountMinusOne}}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </dg:DataGridTemplateColumn.CellTemplate>
