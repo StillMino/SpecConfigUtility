@@ -1,49 +1,64 @@
 ```
-# Build artifacts
-bin/
-obj/
+# Compiled and build artifacts
+*.o
+*.obj
 *.exe
 *.dll
-*.pdb
-*.nupkg
-*.snupkg
-*.msi
-*.msp
-*.msm
+*.so
+*.a
+*.out
 
 # Dependencies
-packages/
 node_modules/
-.nuget/
-.nyc_output/
-coverage/
+venv/
+.venv/
+__pycache__/
+dist/
+build/
+target/
+.gradle/
 
-# IDE specific
-.vs/
-.vscode/
-.idea/
-*.userprefs
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# OS generated
-.DS_Store
-Thumbs.db
-ehthumbs.db
-Icon?
-.deps
-.lockb
-
-# Logs
+# Logs and temp files
 *.log
-*.bak
-*.backup
+*.tmp
+*.swp
+*.swo
 
 # Environment
 .env
 .env.local
-.env.*
-!env.example
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+*.userprefs
+*.suo
+*.user
+*.aps
+*.ncb
+*.ilk
+*.idb
+*.pdb
+*.pgc
+*.pgd
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+.nosync
+*.swp
+*.swo
+
+# Build outputs
+bin/
+obj/
+out/
+release/
+debug/
+x64/
+x86/
+arm64/
 ```
