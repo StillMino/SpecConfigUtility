@@ -1,5 +1,5 @@
 ```
-# Compiled and build artifacts
+# Build artifacts
 *.o
 *.obj
 *.exe
@@ -9,20 +9,13 @@
 *.out
 
 # Dependencies
-node_modules/
-venv/
-.venv/
-__pycache__/
-dist/
-build/
-target/
-.gradle/
+packages/
+lib/
+bin/
+obj/
 
-# Logs and temp files
+# Logs
 *.log
-*.tmp
-*.swp
-*.swo
 
 # Environment
 .env
@@ -32,33 +25,45 @@ target/
 # Editors
 .vscode/
 .idea/
-*.userprefs
-*.suo
-*.user
-*.aps
-*.ncb
-*.ilk
-*.idb
-*.pdb
-*.pgc
-*.pgd
-
-# OS generated files
-.DS_Store
-Thumbs.db
-ehthumbs.db
-Icon?
-.nosync
 *.swp
 *.swo
 
-# Build outputs
-bin/
-obj/
-out/
-release/
-debug/
-x64/
-x86/
-arm64/
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+.Python
+*.so
+
+# Node specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java specific
+*.class
+*.jar
+*.war
+*.ear
+target/
+.gradle/
+build/
+
+# C# specific
+*.userprefs
+[Bb]in/
+[Oo]bj/
+[Tt]est[Rr]esult*/
+*.VisualState.xml
+**/*.*
 ```

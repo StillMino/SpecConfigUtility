@@ -25,6 +25,12 @@ public partial class ProfileEditorViewModel : ObservableObject
     [ObservableProperty] private FieldUiModel? _selectedField;
     [ObservableProperty] private string _searchText = "";
 
+    // Свойства для доступа из DataTemplate
+    public ObservableCollection<FieldUiModel> Fields => SelectedTableFields;
+    public RelayCommand<FieldUiModel> MoveUp => MoveFieldUpCommand;
+    public RelayCommand<FieldUiModel> MoveDown => MoveFieldDownCommand;
+    public RelayCommand<FieldUiModel> Remove => RemoveFieldCommand;
+
     public ProfileEditorViewModel(
         IXmlProfileLoader loader,
         IValidator<ExportProfile> exportValidator,
