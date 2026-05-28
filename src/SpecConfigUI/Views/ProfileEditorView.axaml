@@ -53,12 +53,12 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate x:DataType="core:FieldUiModel">
                                         <StackPanel Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center">
-                                            <Button Command="{Binding $parent[DataGrid].DataContext.MoveUp}" 
+                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveUp}" 
                                                     CommandParameter="{Binding}" Content="⬆" Padding="2,0" 
-                                                    IsEnabled="{Binding $parent[DataGrid].DataContext.Fields.IndexOf(this), Converter={StaticResource GreaterThanZero}}"/>
-                                            <Button Command="{Binding $parent[DataGrid].DataContext.MoveDown}" 
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.Fields.IndexOf(this), Converter={StaticResource GreaterThanZero}}"/>
+                                            <Button Command="{Binding $parent[UserControl].DataContext.MoveDown}" 
                                                     CommandParameter="{Binding}" Content="⬇" Padding="2,0"
-                                                    IsEnabled="{Binding $parent[DataGrid].DataContext.Fields.IndexOf(this), Converter={StaticResource LessThanCountMinusOne}, ConverterParameter={Binding $parent[DataGrid].DataContext.Fields}}"/>
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.Fields.IndexOf(this), Converter={StaticResource LessThanCountMinusOne}}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -75,7 +75,7 @@
                             <DataGridTemplateColumn Header="" Width="40" CanUserResize="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate x:DataType="core:FieldUiModel">
-                                        <Button Command="{Binding $parent[DataGrid].DataContext.Remove}" 
+                                        <Button Command="{Binding $parent[UserControl].DataContext.Remove}" 
                                                 CommandParameter="{Binding}" Content="🗑" Foreground="Red" 
                                                 Padding="4,2" ToolTip.Tip="Удалить поле"/>
                                     </DataTemplate>
