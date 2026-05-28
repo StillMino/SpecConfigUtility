@@ -27,7 +27,13 @@
             <Border Grid.Column="0" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" 
                     BorderThickness="1" Margin="0,0,8,0" CornerRadius="4">
                 <ListBox ItemsSource="{Binding Tables}" SelectedItem="{Binding SelectedTable}" 
-                         DisplayMemberPath="Caption" Margin="4"/>
+                         Margin="4">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Caption}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Border>
 
             <!-- Редактор полей -->
@@ -49,10 +55,10 @@
                                         <StackPanel Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center">
                                             <Button Command="{Binding $parent[UserControl].DataContext.MoveUp}" 
                                                     CommandParameter="{Binding}" Content="⬆" Padding="2,0" 
-                                                    IsEnabled="{Binding Index, RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource GreaterThanZero}}"/>
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.Fields.IndexOf(this), Converter={StaticResource GreaterThanZero}}"/>
                                             <Button Command="{Binding $parent[UserControl].DataContext.MoveDown}" 
                                                     CommandParameter="{Binding}" Content="⬇" Padding="2,0"
-                                                    IsEnabled="{Binding Index, RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource LessThanCountMinusOne}, ConverterParameter={Binding $parent[UserControl].DataContext.Fields}}"/>
+                                                    IsEnabled="{Binding $parent[UserControl].DataContext.Fields.IndexOf(this), Converter={StaticResource LessThanCountMinusOne}, ConverterParameter={Binding $parent[UserControl].DataContext.Fields}}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
