@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes. The modification of 'src/SpecConfig.Core/Models/ExportProfile.cs' is a source code file and does not require any new ignore rules.
+Nothing needs to be added to .gitignore since only a source code file (.cs) was modified and there are no build artifacts, dependencies, or temporary files in the changes.
